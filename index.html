@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luis Soria — Worldwide Outreach Expert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Light theme (default) */
+      --bg:#faf9f6;
+      --bg-elevated:#ffffff;
+      --bg-card:#ffffff;
+      --text:#0f0f0f;
+      --text-muted:#6b6560;
+      --text-body:#2d2a22;
+      --gold:#c9a44a;
+      --gold-dim:#a08430;
+      --gold-glow:rgba(201,164,74,0.15);
+      --navy:#1a2a4c;
+      --border:rgba(26,42,76,0.08);
+      --shadow:rgba(0,0,0,0.04);
+      --hero-stop1:rgba(250,249,246,0.3);
+      --hero-stop2:rgba(250,249,246,0.85);
+      --hero-stop3:var(--bg);
+      --nav-bg:rgba(250,249,246,.9);
+      --btn-ghost-bg:rgba(255,255,255,.6);
+      --btn-ghost-hover-bg:rgba(255,255,255,.9);
+      --foundation-overlay:135deg,var(--navy) 0%,#0f1a30 100%;
+      --mobile-nav-bg:var(--bg);
+      --font-sans:'Space Grotesk',system-ui,sans-serif;
+      --font-mono:'IBM Plex Mono',monospace;
+    }
+    [data-theme="dark"]{
+      --bg:#0a0a0a;
+      --bg-elevated:#111111;
+      --bg-card:#141414;
+      --text:#f0ede8;
+      --text-muted:#7a756e;
+      --text-body:#b0a898;
+      --gold:#d4b05a;
+      --gold-dim:#a89440;
+      --gold-glow:rgba(201,164,74,0.2);
+      --navy:#c0c8d8;
+      --border:rgba(201,164,74,0.1);
+      --shadow:rgba(0,0,0,0.3);
+      --hero-stop1:rgba(10,10,10,0.3);
+      --hero-stop2:rgba(10,10,10,0.85);
+      --hero-stop3:var(--bg);
+      --nav-bg:rgba(10,10,10,.9);
+      --btn-ghost-bg:rgba(20,20,20,.6);
+      --btn-ghost-hover-bg:rgba(30,30,30,.9);
+      --foundation-overlay:135deg,#1a1a2e 0%,#0d0d1a 100%;
+      --mobile-nav-bg:var(--bg);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{
+      background:var(--bg);color:var(--text);font-family:var(--font-sans);
+      -webkit-font-smoothing:antialiased;overflow-x:hidden;
+      font-size:15px;line-height:1.55;
+    }
+    .ambient{
+      position:fixed;top:-50%;left:-50%;width:200%;height:200%;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse at 30% 20%,rgba(201,164,74,0.04) 0%,transparent 50%),
+                 radial-gradient(ellipse at 70% 80%,rgba(201,164,74,0.02) 0%,transparent 50%);
+      animation:ambientDrift 20s ease-in-out infinite;
+    }
+    @keyframes ambientDrift{0%,100%{transform:translate(0,0) rotate(0)}33%{transform:translate(2%,-2%) rotate(.5deg)}66%{transform:translate(-1%,1%) rotate(-.5deg)}}
+    .noise{
+      position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.012;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat:repeat;background-size:256px;
+    }
+    .wrapper{position:relative;z-index:2}
+    img{max-width:100%;display:block}
+
+    /* Nav */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    nav .logo{display:flex;align-items:center;gap:.5rem}
+    nav .logo img{height:28px;width:auto;filter:brightness(1.05)}
+    nav .logo span{font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
+    nav .meta{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;color:var(--text-muted)}
+    .theme-toggle{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .3s ease;position:relative;overflow:hidden;margin-left:1rem}
+    .theme-toggle:hover{border-color:var(--gold);transform:scale(1.1)}
+    .theme-toggle svg{width:16px;height:16px;transition:transform .4s ease}
+    .theme-toggle .sun{position:absolute;opacity:0;transform:scale(0.5);transition:all .4s ease}
+    .theme-toggle .moon{position:absolute;opacity:1;transform:scale(1);transition:all .4s ease}
+    [data-theme="dark"] .theme-toggle .sun{opacity:1;transform:scale(1)}
+    [data-theme="dark"] .theme-toggle .moon{opacity:0;transform:scale(0.5)}
+    .hamburger{display:flex;flex-direction:column;gap:3.5px;cursor:pointer;width:18px}
+    .hamburger span{height:1.5px;background:var(--navy);width:100%;transition:all .3s ease}
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(3px,3px)}
+    .hamburger.active span:nth-child(2){opacity:0}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(3px,-3px)}
+    .mobile-nav{display:none;position:fixed;inset:0;background:var(--mobile-nav-bg);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem}
+    .mobile-nav.active{display:flex}
+    .mobile-nav a{font-size:1.1rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--text-body);text-decoration:none;transition:color .3s}
+    .mobile-nav a:hover{color:var(--gold)}
+    @media(min-width:768px){.hamburger,.mobile-nav{display:none}}
+
+    /* Hero */
+    .hero{
+      min-height:100dvh;display:flex;flex-direction:column;justify-content:flex-end;
+      padding:5rem 1.5rem 3rem;position:relative;overflow:hidden;
+      background:linear-gradient(180deg,var(--hero-stop1) 0%,var(--hero-stop2) 60%,var(--hero-stop3) 100%),
+                 url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
+    }
+    .hero .hero-inner{max-width:680px}
+    .hero .eyebrow{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.75rem;opacity:0;animation:fadeUp .8s ease .3s forwards}
+    .hero h1{font-size:clamp(1.8rem,6vw,3.5rem);font-weight:300;line-height:1.05;letter-spacing:-.02em;color:var(--navy);max-width:600px}
+    .hero h1 .accent{color:var(--gold);font-weight:400}
+    .hero .sub{font-size:clamp(.9rem,1.4vw,1.05rem);font-weight:300;color:var(--text-body);max-width:480px;margin-top:1rem;line-height:1.6;opacity:0;animation:fadeUp .8s ease .7s forwards}
+    .hero .cta-group{margin-top:1.5rem;display:flex;gap:.6rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease .9s forwards}
+    .btn-primary{background:var(--gold);color:#fff;border:none;padding:.75rem 1.75rem;font-family:var(--font-sans);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s ease}
+    .btn-primary:hover{background:#d4b05a;transform:translateY(-2px);box-shadow:0 8px 30px var(--gold-glow)}
+    .btn-ghost{background:var(--btn-ghost-bg);color:var(--text-body);border:1px solid var(--border);padding:.75rem 1.75rem;font-family:var(--font-sans);font-size:.7rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s ease;backdrop-filter:blur(4px)}
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold);background:var(--btn-ghost-hover-bg)}
+
+    /* Section */
+    .section{padding:5rem 1.5rem;max-width:780px;margin:0 auto}
+    .section::before{content:"";display:block;width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 2.5rem}
+    .section-label{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+    .section h2{font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:300;letter-spacing:-.02em;line-height:1.1;margin-bottom:.75rem;color:var(--navy)}
+    .section h2 em{font-style:italic;color:var(--gold)}
+    .section h3{font-size:1.1rem;font-weight:500;color:var(--navy);margin:1.25rem 0 .5rem;letter-spacing:-.01em}
+    .section p{color:var(--text-body);font-size:.9rem;line-height:1.65;margin-bottom:.75rem}
+    .section p:last-child{margin-bottom:0}
+    .section blockquote{font-style:italic;color:var(--navy);border-left:2px solid var(--gold);padding-left:1rem;margin:.75rem 0;font-size:.95rem;line-height:1.6}
+    .section-dark{background:var(--bg-elevated);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .lang-tag{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);display:block;margin-bottom:.25rem}
+
+    /* Values table */
+    .values{display:grid;gap:.5rem;margin-top:1rem}
+    .val-row{display:grid;grid-template-columns:1fr 2fr;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--border);align-items:start}
+    .val-row .v-label{font-weight:500;color:var(--navy);font-size:.85rem}
+    .val-row .v-desc{color:var(--text-body);font-size:.82rem;line-height:1.5}
+    @media(max-width:480px){.val-row{grid-template-columns:1fr;gap:.15rem;padding:.5rem 0}}
+
+    /* Quote */
+    .quote-block{padding:3rem 1.5rem;text-align:center;max-width:640px;margin:0 auto}
+    .quote-block .mark{font-family:var(--font-mono);font-size:2.5rem;color:var(--gold);opacity:.3;line-height:1}
+    .quote-block blockquote{font-size:clamp(1rem,1.8vw,1.3rem);font-style:italic;font-weight:300;line-height:1.4;color:var(--navy);padding:0;margin:0 0 .5rem 0}
+    .quote-block .author{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+
+    /* Service strip */
+    .services-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-elevated);padding:2rem 1rem}
+    .services-strip-inner{display:flex;justify-content:center;align-items:center;gap:1.5rem;flex-wrap:wrap;max-width:900px;margin:0 auto}
+    .svc{display:flex;flex-direction:column;align-items:center;gap:.25rem;transition:all .3s ease;padding:.5rem}
+    .svc .num{font-family:var(--font-mono);font-size:.55rem;color:var(--gold-dim);letter-spacing:.1em}
+    .svc span{font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-body)}
+
+    /* Cards */
+    .cards{display:grid;grid-template-columns:1fr;gap:.75rem;max-width:780px;margin:0 auto;padding:0 1.5rem 2rem}
+    .card{background:var(--bg-card);border:1px solid var(--border);padding:1.5rem;transition:all .4s ease;position:relative;overflow:hidden;box-shadow:0 1px 3px var(--shadow)}
+    .card::before{content:"";position:absolute;top:0;left:0;width:100%;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:translateX(-100%);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+    .card:hover::before{transform:translateX(0)}
+    .card:hover{border-color:rgba(201,164,74,0.25);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.06)}
+    .card .num{font-family:var(--font-mono);font-size:.5rem;color:var(--gold);margin-bottom:.5rem;letter-spacing:.1em}
+    .card h3{font-size:1.1rem;font-weight:500;margin-bottom:.35rem;letter-spacing:-.01em;color:var(--navy)}
+    .card p{font-size:.82rem;color:var(--text-body);line-height:1.55;font-weight:300}
+    .card .arrow{margin-top:.75rem;font-size:1rem;color:var(--gold-dim);transition:all .3s ease;display:inline-block}
+    .card:hover .arrow{color:var(--gold);transform:translateX(4px)}
+    @media(min-width:640px){.cards{grid-template-columns:1fr 1fr;gap:.75rem}}
+
+    /* Stats */
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:720px;margin:0 auto;padding:0 1.5rem 2.5rem}
+    .stat{border-left:1px solid var(--border);padding-left:1rem}
+    .stat .number{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:300;color:var(--gold);letter-spacing:-.02em;line-height:1}
+    .stat .label{font-family:var(--font-mono);font-size:.5rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.15em;margin-top:.35rem}
+    @media(min-width:768px){.stats{grid-template-columns:repeat(4,1fr);gap:2rem}}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr;gap:2rem;max-width:780px;margin:0 auto;padding:0 1.5rem 2rem}
+    .contact-left .email{font-size:clamp(1rem,1.8vw,1.2rem);color:var(--gold);text-decoration:none;display:inline-block;margin-top:.5rem;position:relative}
+    .contact-left .email::after{content:"";position:absolute;bottom:-2px;left:0;width:100%;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+    .contact-left .email:hover::after{transform:scaleX(1);transform-origin:left}
+    .contact-left .detail{margin-top:1.25rem;padding-top:.75rem;border-top:1px solid var(--border)}
+    .contact-left .detail h4{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.35rem}
+    .contact-left .detail p{font-size:.8rem;color:var(--text-body);line-height:1.5}
+    .form-row{margin-bottom:1rem}
+    .form-row label{display:block;font-family:var(--font-mono);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.35rem}
+    .form-row input,.form-row textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);padding:.5rem 0;font-family:var(--font-sans);font-size:.85rem;color:var(--text);outline:none;transition:border-color .3s ease;border-radius:0;-webkit-appearance:none}
+    .form-row input:focus,.form-row textarea:focus{border-bottom-color:var(--gold)}
+    .form-row textarea{resize:vertical;min-height:60px}
+    .form-submit{font-family:var(--font-sans);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:#fff;padding:.75rem 2rem;border:none;cursor:pointer;transition:all .3s ease;width:100%}
+    .form-submit:hover{background:#d4b05a;transform:translateY(-2px)}
+    @media(min-width:768px){.contact-grid{grid-template-columns:1fr 1.1fr;gap:2rem}.form-submit{width:auto}}
+
+    /* Social */
+    .socials{display:flex;gap:1rem;margin-top:.5rem}
+    .socials a{color:var(--text-muted);text-decoration:none;font-size:.8rem;transition:color .3s}
+    .socials a:hover{color:var(--gold)}
+
+    /* Foundation banner */
+    .foundation{background:linear-gradient(var(--foundation-overlay));color:#fff;padding:3.5rem 1.5rem;border-radius:0}
+    .foundation-inner{max-width:780px;margin:0 auto}
+    .foundation h3{font-size:1.1rem;font-weight:400;color:var(--gold);margin-bottom:.5rem}
+    .foundation p{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:.5rem}
+    .foundation .foundation-links{display:flex;gap:1rem;margin-top:.75rem;flex-wrap:wrap}
+    .foundation .foundation-links a{color:var(--gold);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s}
+    .foundation .foundation-links a:hover{border-bottom-color:var(--gold)}
+
+    /* Footer */
+    footer{border-top:1px solid var(--border);padding:1.25rem;text-align:center;background:var(--bg-elevated)}
+    footer .foot-inner{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+    footer img{height:24px;width:auto}
+    footer p{font-family:var(--font-mono);font-size:.5rem;color:var(--text-muted);letter-spacing:.1em}
+    @media(min-width:768px){footer .foot-inner{flex-direction:row;justify-content:space-between;padding:0 1.5rem}}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes charReveal{from{opacity:0;transform:translateY(110%)}to{opacity:1;transform:translateY(0)}}
+    .char{display:inline-block;opacity:0;transform:translateY(110%);animation:charReveal .9s cubic-bezier(.22,1,.36,1) forwards}
+    .char.space{width:.3em}
+    .reveal{opacity:0;transform:translateY(25px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <div class="ambient"></div>
+  <div class="noise"></div>
+  <div class="wrapper">
+
+    <nav>
+      <div class="logo">
+        <img src="logo_nav.png" alt="LS">
+        <span>Luis Soria</span>
+      </div>
+      <div class="meta">Worldwide Outreach</div>
+      <div style="display:flex;align-items:center">
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <div class="hamburger" id="ham" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#about" onclick="toggleMenu()">About</a>
+      <a href="#mission" onclick="toggleMenu()">Mission</a>
+      <a href="#values" onclick="toggleMenu()">Values</a>
+      <a href="#experience" onclick="toggleMenu()">Experience</a>
+      <a href="#services" onclick="toggleMenu()">Services</a>
+      <a href="#foundation" onclick="toggleMenu()">Foundation</a>
+      <a href="#contact" onclick="toggleMenu()">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">Worldwide Outreach Expert</div>
+        <h1 id="heroTitle">Building bridges<br><span class="accent">across nations.</span></h1>
+        <p class="sub">For 25 years, connecting healthcare, technology, and communities through compassionate leadership and global vision. Inspired by Jesus. Guided by integrity. Committed to results.</p>
+        <div class="cta-group">
+          <a href="#contact"><button class="btn-primary">Start a Conversation</button></a>
+          <a href="#about"><button class="btn-ghost">Explore</button></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services strip -->
+    <section class="services-strip" id="services">
+      <div class="services-strip-inner">
+        <div class="svc"><div class="num">01</div><span>Procurement</span></div>
+        <div class="svc"><div class="num">02</div><span>Youth Training</span></div>
+        <div class="svc"><div class="num">03</div><span>Speaker Booking</span></div>
+        <div class="svc"><div class="num">04</div><span>Motivational Content</span></div>
+      </div>
+    </section>
+
+    <!-- About / Sobre mí -->
+    <section class="section section-dark" id="about">
+      <div class="section-label reveal">About</div>
+      <h2 class="reveal">Sobre mí / <em>About me</em></h2>
+
+      <span class="lang-tag reveal">Español</span>
+      <p class="reveal">Soy un seguidor de Cristo apasionado por compartir las buenas noticias del evangelio y por ver cómo Su Palabra transforma vidas. Mi llamado une dos grandes pasiones: las personas y la misión. Amo construir relaciones genuinas, escuchar historias y ser testigo del poder de Dios obrando en cada encuentro.</p>
+      <p class="reveal">Mi propósito es ayudar a poner la Palabra de Dios en las manos y corazones de las personas en Estados Unidos y alrededor del mundo.</p>
+
+      <span class="lang-tag reveal" style="margin-top:1.25rem">English</span>
+      <p class="reveal">I'm a follower of Christ passionate about sharing the good news of the Gospel and witnessing how God's Word transforms lives. My calling combines two great passions: people and mission. I love building genuine relationships, hearing people's stories, and seeing God's power at work in every encounter.</p>
+      <p class="reveal">My purpose is to help place God's Word in the hands and hearts of people across the United States and around the world.</p>
+    </section>
+
+    <!-- Mission -->
+    <div class="quote-block">
+      <div class="mark">&ldquo;</div>
+      <blockquote>True outreach is not about reaching the most people — it's about reaching the right people, with the right heart.</blockquote>
+      <div class="author">— Luis Soria, Founder</div>
+    </div>
+
+    <section class="section" id="mission">
+      <div class="section-label reveal">Mission</div>
+      <h2 class="reveal">Mi misión / <em>My mission</em></h2>
+
+      <span class="lang-tag reveal">Español</span>
+      <p class="reveal">Creo que cada creyente está llamado a <strong style="color:var(--navy)">"ir y compartir"</strong>. Por eso, a través de mi labor busco encender esa pasión en el corazón de la Iglesia, equipando y motivando a otros a llevar el mensaje de salvación de una manera relacional, creativa y relevante.</p>
+      <p class="reveal">Trabajo para fortalecer alianzas con iglesias, ministerios y donantes comprometidos, generando oportunidades que permitan que más personas conozcan a Jesús.</p>
+
+      <span class="lang-tag reveal" style="margin-top:1.25rem">English</span>
+      <p class="reveal">I believe every believer is called to <strong style="color:var(--navy)">"go and share."</strong> Through my work I aim to ignite that passion within the Church—equipping and inspiring others to bring the message of salvation through relational, creative, and relevant ways.</p>
+      <p class="reveal">I build partnerships with churches, ministries, and donors to expand opportunities for people to encounter Jesus.</p>
+    </section>
+
+    <!-- Core Values -->
+    <section class="section section-dark" id="values">
+      <div class="section-label reveal">Values</div>
+      <h2 class="reveal">Valores / <em>Core values</em></h2>
+      <div class="values reveal">
+        <div class="val-row"><div class="v-label">Cristo al centro</div><div class="v-desc">Todo lo que hago apunta a Él.</div></div>
+        <div class="val-row"><div class="v-label">Innovación y creatividad</div><div class="v-desc">Nuevas formas de alcanzar a las personas con el mensaje eterno.</div></div>
+        <div class="val-row"><div class="v-label">Excelencia en el servicio</div><div class="v-desc">Servir con empatía, calidad y propósito.</div></div>
+        <div class="val-row"><div class="v-label">Colaboración</div><div class="v-desc">Un solo cuerpo, una sola misión.</div></div>
+        <div class="val-row"><div class="v-label">Integridad y rendición de cuentas</div><div class="v-desc">Transparencia en cada paso.</div></div>
+        <div class="val-row"><div class="v-label">Visión y estrategia</div><div class="v-desc">Soñar en grande, actuar con propósito.</div></div>
+        <div class="val-row"><div class="v-label">Humildad</div><div class="v-desc">Todo es por Su gracia.</div></div>
+      </div>
+    </section>
+
+    <!-- Ministry & Experience -->
+    <section class="section" id="experience">
+      <div class="section-label reveal">Experience</div>
+      <h2 class="reveal">Ministerio y experiencia / <em>Ministry &amp; experience</em></h2>
+
+      <span class="lang-tag reveal">Español</span>
+      <p class="reveal">Con más de 25 años de experiencia en desarrollo, recaudación de fondos y liderazgo ministerial, me dedico a crear relaciones sólidas con donantes, iglesias y organizaciones comprometidas con la expansión del Reino. Soy una persona emprendedora y comunicativa, apasionada por ver cómo Dios utiliza cada don, recurso y oportunidad para cumplir Su propósito.</p>
+
+      <span class="lang-tag reveal" style="margin-top:1rem">English</span>
+      <p class="reveal">With over 25 years of experience in development, fundraising, and ministry leadership, I focus on building strong relationships with donors, churches, and organizations dedicated to advancing God's Kingdom. I'm an entrepreneurial communicator passionate about seeing how God uses every gift, resource, and opportunity to fulfill His purpose.</p>
+    </section>
+
+    <!-- Calling -->
+    <div class="quote-block">
+      <div class="mark">&ldquo;</div>
+      <blockquote>Mi deseo es seguir y servir, con gozo, integridad y visión. Porque compartir Su Palabra no es solo una tarea… es una oportunidad santa.</blockquote>
+      <div class="author">— Llamado / Calling</div>
+    </div>
+
+    <section class="section">
+      <span class="lang-tag reveal">English</span>
+      <p class="reveal" style="text-align:center;font-style:italic">My desire is to follow and serve—with joy, integrity, and vision. Because sharing His Word is not just a task… it's a holy opportunity.</p>
+    </section>
+
+    <!-- Services cards -->
+    <div class="section-label reveal" style="max-width:780px;margin:0 auto;padding:0 1.5rem">What I Do</div>
+    <h2 class="reveal" style="max-width:780px;margin:0 auto;padding:0 1.5rem 1.25rem;color:var(--navy)">Services built on<br><em style="color:var(--gold)">experience &amp; trust.</em></h2>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="num">01 / Procurement</div>
+        <h3>Healthcare &amp; Technology</h3>
+        <p>Strategic sourcing and contract negotiation for healthcare systems and tech platforms across Latin America and Asia.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="card reveal">
+        <div class="num">02 / Training</div>
+        <h3>Youth Capacitación</h3>
+        <p>Hands-on leadership development for the next generation. Building confidence and spiritual foundation worldwide.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="card reveal">
+        <div class="num">03 / Network</div>
+        <h3>Asian Speaker Booking</h3>
+        <p>Access to an exclusive network of keynote speakers, thought leaders, and cultural ambassadors from across Asia.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="card reveal">
+        <div class="num">04 / Content</div>
+        <h3>Books &amp; Motivation</h3>
+        <p>Published works and speaking engagements focused on leadership, faith-driven business, and moving nations forward.</p>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <section class="section section-dark">
+      <div class="section-label reveal">Impact</div>
+      <h2 class="reveal">Numbers that<br><em>tell a story.</em></h2>
+    </section>
+    <div class="stats">
+      <div class="stat reveal"><div class="number" data-count="25">0</div><div class="label">Years of Impact</div></div>
+      <div class="stat reveal"><div class="number" data-count="40">0</div><div class="label">Countries Reached</div></div>
+      <div class="stat reveal"><div class="number" data-count="500">0</div><div class="label">Youth Trained</div></div>
+      <div class="stat reveal"><div class="number" data-count="10000">0</div><div class="label">Lives Transformed</div></div>
+    </div>
+
+    <!-- Foundation -->
+    <section class="foundation" id="foundation">
+      <div class="foundation-inner">
+        <div class="section-label" style="color:var(--gold)">Foundation</div>
+        <h2 style="font-size:clamp(1.3rem,3vw,2rem);font-weight:300;color:#fff;margin-bottom:.75rem">Pie Plano de Luis Soria</h2>
+        <p>Con cada ejemplar de <strong style="color:var(--gold)">Pie Plano de Luis Soria</strong> que llega a tus manos, un niño da un paso más hacia un futuro mejor: recibe una plantilla ortopédica, una biblia y una beca de liderazgo de tres meses para fortalecer su cuerpo, mente y espíritu.</p>
+        <p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-top:.5rem">With every copy of Pie Plano that reaches you, a child takes a step toward a better future: receiving an orthotic insole, a Bible, and a three-month leadership scholarship to strengthen body, mind, and spirit.</p>
+        <div class="foundation-links">
+          <a href="https://www.pieplano.org" target="_blank">www.pieplano.org</a>
+          <a href="https://www.luissoria.com" target="_blank">www.luissoria.com</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section section-dark" id="contact">
+      <div class="section-label reveal">Let's Connect</div>
+      <h2 class="reveal">Ready to build<br><em>something meaningful?</em></h2>
+      <p class="reveal">For speaking engagements, procurement partnerships, youth training, or ministry collaboration — reach out directly.</p>
+    </section>
+
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <a href="mailto:info@luissoria.com" class="email">info@luissoria.com</a>
+        <div class="detail">
+          <h4>Response Time</h4>
+          <p>Within 24 hours for all inquiries</p>
+        </div>
+        <div class="detail">
+          <h4>Social</h4>
+          <div class="socials">
+            <a href="https://instagram.com/luissoriacom" target="_blank">Instagram</a>
+            <a href="https://youtube.com/@Luissoriacom" target="_blank">YouTube</a>
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="#" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <form onsubmit="event.preventDefault();this.innerHTML='<p style=\'color:var(--gold);font-size:1rem\'>Thank you. We will be in touch within 24 hours.</p>';">
+          <div class="form-row"><label>Name</label><input type="text" placeholder="Your full name" required></div>
+          <div class="form-row"><label>Email</label><input type="email" placeholder="you@company.com" required></div>
+          <div class="form-row"><label>Subject</label><input type="text" placeholder="How can I help?"></div>
+          <div class="form-row"><label>Message</label><textarea placeholder="Tell me about your project, event, or partnership idea..."></textarea></div>
+          <button type="submit" class="form-submit">Send Message →</button>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <div class="foot-inner">
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <img src="logo_nav.png" alt="LS">
+          <span style="font-size:.65rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--navy)">Luis Soria</span>
+        </div>
+        <p>© 2026 Luis Soria. Worldwide Outreach Expert. Inspired by Jesus.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    (function(){
+      const h1=document.getElementById('heroTitle');
+      if(!h1)return;
+      const raw=h1.innerHTML;
+      let out='',delay=0,baseDelay=.45;
+      const tagRe=/<[^>]+>/g;
+      const parts=raw.split(tagRe);
+      const tags=raw.match(tagRe)||[];
+      for(let i=0;i<parts.length;i++){
+        const txt=parts[i];
+        for(const ch of txt){
+          if(ch===' '){out+='<span class="char space" style="animation-delay:'+(baseDelay+delay)+'s"></span> ';delay+=.025;continue;}
+          const cls=raw.includes('accent')&&(txt.includes('across')||txt.includes('nations'))?'char accent':'char';
+          out+='<span class="'+cls+'" style="animation-delay:'+(baseDelay+delay)+'s">'+ch+'</span>';
+          delay+=.025;
+        }
+        if(tags[i])out+=tags[i];
+      }
+      h1.innerHTML=out;
+    })();
+    function toggleTheme(){
+      const html=document.documentElement;
+      const isDark=html.getAttribute('data-theme')==='dark';
+      if(isDark){html.removeAttribute('data-theme');localStorage.removeItem('theme');}
+      else{html.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');}
+    }
+    (function initTheme(){
+      const saved=localStorage.getItem('theme');
+      if(saved==='dark')document.documentElement.setAttribute('data-theme','dark');
+    })();
+    function toggleMenu(){
+      document.getElementById('ham').classList.toggle('active');
+      document.getElementById('mobileNav').classList.toggle('active');
+    }
+    const observer=new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          entry.target.querySelectorAll('[data-count]').forEach(counter=>{
+            const target=parseInt(counter.dataset.count);
+            const duration=1500;const start=performance.now();
+            const update=(now)=>{
+              const p=Math.min((now-start)/duration,1);
+              const e=1-Math.pow(1-p,3);
+              counter.textContent=Math.floor(e*target).toLocaleString()+(target>=10000?'+':target>=25?'+':'');
+              if(p<1)requestAnimationFrame(update);
+            };
+            requestAnimationFrame(update);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>{
+      observer.observe(el);
+      const rect=el.getBoundingClientRect();
+      if(rect.top<window.innerHeight&&rect.bottom>0){
+        el.classList.add('visible');
+      }
+    });
+  </script>
+</body>
+</html>
