@@ -181,6 +181,15 @@
     .hero h1 .accent{color:var(--gold);font-weight:400}
     .hero .sub{font-size:clamp(.9rem,1.4vw,1.05rem);font-weight:300;color:var(--text-body);max-width:480px;margin-top:1.25rem;line-height:1.6;opacity:0;animation:fadeUp .8s ease .9s forwards}
     .hero .cta-group{margin-top:2rem;display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp .8s ease 1.1s forwards}
+    .hero .cta-group a{text-decoration:none}
+    .btn-primary{
+      background:var(--navy);color:#fff;font-family:var(--font-sans);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 2.2rem;border:none;border-radius:0;cursor:pointer;transition:all .3s ease;border:1px solid var(--navy)
+    }
+    .btn-primary:hover{background:var(--gold);border-color:var(--gold);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,164,74,0.25)}
+    .btn-ghost{
+      background:transparent;color:var(--text-body);font-family:var(--font-sans);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 2.2rem;border:1px solid var(--border);border-radius:0;cursor:pointer;transition:all .3s ease
+    }
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
     @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
     
     @media(max-width:640px){
