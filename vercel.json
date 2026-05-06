@@ -1,14 +1,15 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
+      "destination": "https://www.luissoria.com/$1",
       "has": [
         {
-          "type": "host",
+          "type": "header",
+          "key": "host",
           "value": "luissoria.com"
         }
       ],
-      "destination": "https://www.luissoria.com/:path*",
       "permanent": true
     }
   ]
